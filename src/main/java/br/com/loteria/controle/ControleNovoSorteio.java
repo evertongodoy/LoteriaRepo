@@ -1,0 +1,28 @@
+package br.com.loteria.controle;
+
+import java.util.List;
+
+import br.com.loteria.beans.Concurso;
+import br.com.loteria.dao.ConcursoDAO;
+
+public class ControleNovoSorteio {
+
+	public ControleNovoSorteio() { }
+	
+	/**
+	 * Recebe lista de concursos como argumento e chama procedimento para gravacao no DAO
+	 * @param listaConcurso
+	 */
+	public void salvarNovoJogo(List<Concurso> listaConcurso){
+		new ConcursoDAO().salvarDadosConcurso(listaConcurso);
+	}
+
+	/**
+	 * Recupera no DAO todos os concursos exixtentes
+	 * @return
+	 */
+	public List<Concurso> recuperarTodosSorteios(){
+		return new ConcursoDAO().consultaTodosConcursos();
+	}
+	
+}

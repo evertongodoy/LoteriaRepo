@@ -1,0 +1,14 @@
+br\com\loteria\utils\JpaUtil.class
+br\com\loteria\beans\NumerosExistentes.class
+br\com\loteria\beans\ResultadoSorteio.class
+br\com\loteria\mbeans\MeusJogosMB.class
+br\com\loteria\controle\ControleMinhaAposta.class
+br\com\loteria\beans\MinhaAposta.class
+br\com\loteria\controle\ControleNovoSorteio.class
+br\com\loteria\beans\Concurso.class
+br\com\loteria\dao\MinhaApostaDAO.class
+br\com\loteria\languages\ctrl\LocaleController.class
+br\com\loteria\controle\ControleConsultaResultado.class
+br\com\loteria\mbeans\NovoSorteioMB.class
+br\com\loteria\mbeans\ConsultarResultadosMB.class
+br\com\loteria\dao\ConcursoDAO.class

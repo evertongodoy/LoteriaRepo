@@ -1,0 +1,233 @@
+<ui:composition template="/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+
+	<ui:define name="conteudo">
+	
+	
+
+		<div class="container">
+			<h:form id="frmSalvarMeusNumeros">	
+			
+				<div class="row">
+					<div class="col-sm-12">
+						<h3><h:outputLabel value="AQUI EU VOU FAZER AS VALIDACOES DE ACERTOS DOS RESULTADOS"/> </h3>
+						<p><h:outputLabel value="#{msg['cadastrar.numDifAposta']}"/></p>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-12" style="height:20px;"></div>
+				</div>
+				
+				<div class="row">
+
+				    <div class="col-md-2">
+				    	<h:commandButton value="Minhas Apostas" class="btn btn-primary btn-md" action="#{consultarResultadosMB.prepararListaMinhasApostas}">
+				    		<f:ajax render="frmSalvarMeusNumeros" execute="frmSalvarMeusNumeros"></f:ajax>
+				    	</h:commandButton>
+				    </div>
+				    
+				    <div class="col-md-2">
+				    	<h:commandButton value="Verificar Selecionados" class="btn btn-primary btn-md">
+				    					 <f:ajax listener="#{consultarResultadosMB.prepararConferenciaDeAcertosApostas}"
+				    					 		 execute="frmSalvarMeusNumeros"
+				    					 		 render="frmSalvarMeusNumeros"
+				    					  		 onevent="listener" ></f:ajax>
+				    	</h:commandButton>
+				    </div>
+				    
+					
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-12" style="height:40px;"></div>
+				</div>
+				
+				
+				<div class="row">
+					
+					<div class="col-md-12">
+
+						<h:dataTable value="#{consultarResultadosMB.listaMinhasApostas}" var="aposta" border="2" cellspacing="0" width="100%" styleClass="table table-striped table-bordered">
+				            <h:column>
+				                <f:facet name="header">Selecionar</f:facet>
+				                <h:selectBooleanCheckbox value="#{consultarResultadosMB.checked[aposta.idAposta]}" />
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header">ID APOSTA</f:facet>
+				                    #{aposta.idAposta}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header">DATA CADASTRO</f:facet>
+				                    <h:outputText value="#{aposta.dataCriacao}">
+										<f:convertDateTime pattern="dd/MM/yyyy"/>
+									</h:outputText>
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 1</f:facet>
+				                    #{aposta.numero1}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 2</f:facet>
+				                    #{aposta.numero2}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 3</f:facet>
+				                    #{aposta.numero3}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 4</f:facet>
+				                    #{aposta.numero4}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 5</f:facet>
+				                    #{aposta.numero5}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 6</f:facet>
+				                    #{aposta.numero6}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 7</f:facet>
+				                    #{aposta.numero7}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 8</f:facet>
+				                    #{aposta.numero8}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 9</f:facet>
+				                    #{aposta.numero9}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 10</f:facet>
+				                    #{aposta.numero10}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 11</f:facet>
+				                    #{aposta.numero11}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 12</f:facet>
+				                    #{aposta.numero12}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 13</f:facet>
+				                    #{aposta.numero13}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 14</f:facet>
+				                    #{aposta.numero14}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 15</f:facet>
+				                    #{aposta.numero15}
+				            </h:column>
+
+				        </h:dataTable>
+
+					</div>
+				</div>
+				
+				
+		
+		
+				<div id="#{cc.clientId}" class="modal fade myModal">
+				
+					<div class="modal-dialog modal-lg">
+				      <div class="modal-content">
+				        <div class="modal-header">
+				          <h4 class="modal-title">Conferir resultados de acertos</h4>
+				        </div>
+				        <div class="modal-body">
+
+							<!-- Inicio -->
+								
+								<div class="row">
+					
+									<div class="col-md-12">
+				
+										<h:dataTable value="#{consultarResultadosMB.listaResultadoSorteio}" var="resultadoSorteio" border="2" cellspacing="0" width="100%" styleClass="table table-striped table-bordered">
+								            
+								            <h:column>
+								                <f:facet name="header">NUMERO SORTEIO</f:facet>
+								                    #{resultadoSorteio.concursoGanhador.numeroConcurso}
+								            </h:column>
+								            <h:column>
+								                <f:facet name="header">DATA SORTEIO</f:facet>
+								                    <h:outputText value="#{resultadoSorteio.concursoGanhador.dataConcurso}">
+														<f:convertDateTime pattern="dd/MM/yyyy"/>
+													</h:outputText>
+								            </h:column>
+								            <h:column>
+								                <f:facet name="header">ID APOSTA</f:facet>
+								                    <h:outputText value="#{resultadoSorteio.minhaApostaGanhadora.idAposta}"/>
+								            </h:column>
+								            <h:column>
+								                <f:facet name="header">ACERTOS</f:facet>
+								                    <h:outputText value="#{resultadoSorteio.minhaApostaGanhadora.numerosAcertados}"/>
+								                    
+								            </h:column>
+								            <h:column>
+								                <f:facet name="header">TOTAL ACERTO</f:facet>
+								                    <h:outputText value="#{resultadoSorteio.minhaApostaGanhadora.totalAcerto}"/>
+								                    
+								            </h:column>
+								            
+								            <h:column>
+								                <f:facet name="header">ERROS</f:facet>
+								                    <h:outputText value="#{resultadoSorteio.minhaApostaGanhadora.numerosErrados}"/>
+								                    
+								            </h:column>
+								            <h:column>
+								                <f:facet name="header">TOTAL ERRO</f:facet>
+								                    <h:outputText value="#{resultadoSorteio.minhaApostaGanhadora.totalErro}"/>
+								            </h:column>
+								            
+								            <h:column>
+								                <f:facet name="header">R$ GANHO</f:facet>
+								                    <h:outputText value="#{resultadoSorteio.minhaApostaGanhadora.totalGanhoReais}"/>
+								            </h:column>
+				
+								        </h:dataTable>
+				
+									</div>
+								</div>
+							
+							<!-- Fimm -->				          
+
+
+
+				        </div>
+				        <div class="modal-footer">
+				          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        </div>
+				      </div>
+				    </div>
+					
+					
+					
+				
+			    </div>
+		
+		
+		
+				
+				
+				
+				
+				
+				
+				
+			</h:form>
+		</div>
+	
+	</ui:define>
+
+
+
+</ui:composition>

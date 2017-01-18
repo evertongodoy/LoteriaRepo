@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="LoteriaPU" transaction-type="RESOURCE_LOCAL">
+	
+		<!-- Beans de persistencia -->
+		<class>br.com.loteria.beans.Concurso</class>
+		<class>br.com.loteria.beans.MinhaAposta</class>
+		
+		
+	
+		<properties>
+			
+			<!-- JDBC Database connection settings -->
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/loteria_testes?useSSL=false"/>
+			<property name="hibernate.connection.username" value="root"/>
+			<property name="hibernate.connection.password" value="mysql"/>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+				        
+	        
+	        <!--  JDBC connection pool settings-->
+	        <property name="hibernate.connection.pool_size" value="2"/>
+	        
+	        <!-- SQL Dialect -->
+	        <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+	        
+	        <!-- Echo the SQL to stdout -->
+	        <property name="hibernate.show_sql" value="true"/>
+	        <property name="hibernate.format_sql" value="true"/>
+	        
+	        <!-- Set the current session context -->
+	        <property name="current_session_context_class" value="thread"/>	
+	        
+	        <property name="hibernate.hbm2ddl.auto" value="update" />
+
+
+		</properties>
+	
+	</persistence-unit>
+	
+	
+</persistence>

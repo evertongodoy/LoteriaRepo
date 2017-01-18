@@ -1,0 +1,228 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>JSF 2.0 - Exemplo de template</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"/>
+	
+	<!-- JQuery> fora do head ocorria erro-->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
+    <!-- CSS JQuery para o calendario Datepicker -->
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+
+	<!-- Bootstrap -->
+    <link rel="stylesheet" href="resources/bootstrap/dist/css/bootstrap.min.css"/>
+
+
+	<!-- Funcao para obter o calendario a partir do  metodo datepicker  definido na jQuery UI -->
+	<!-- dicas: http://www.devmedia.com.br/calendario-em-jquery-criando-calendarios-com-datepicker/37458 -->
+	<!-- # para input e . para h:input atribuindo no styleClass -->
+    <script>
+		$( function() {
+			$( ".calendario" ).datepicker({
+				// Permite alterar Mes e Ano
+				 changeMonth: true,
+			     changeYear: true,
+				// Mostra datas dos Meses Seguintes e Anteriores
+			     showOtherMonths: true,
+			     selectOtherMonths: true,
+			    // Formato de data
+			     dateFormat: 'dd/mm/yy'
+				    
+			});
+		} );
+
+		function showModal() {
+		    $('.myModal').modal('show');
+		}
+
+
+		function listener(data) {
+		    var status = data.status; // Can be "begin", "complete" or "success".
+
+		    switch (status) {
+		        case "success": // After update of HTML DOM based on ajax response..
+		        	$('.myModal').modal('show');
+		            break;
+		    }
+		}
+		
+		
+	</script>
+    
+    
+    
+    <style rel="stylesheet" type="text/css">
+    	
+    	body {
+			background: #fff; 
+			font-family: "Arial", Georgia, TSerif;
+			padding-top: 48px;
+		}
+    
+		.navbar-inverse {
+		    background-color: #451f1f;
+		    border-color: #080808;
+		}
+		
+		.footer {
+			position:absolute;
+			bottom:0;
+			width:100%;
+			text-align: center;
+			color: #451f1f;
+		}
+		
+		.centralizar{
+			text-align: center;
+		}
+		
+		.dropdown_menu2{
+			min-width: 90px;
+		}
+		
+		.texto_menu{
+			font-family: "Arial", Georgia, TSerif;
+			font-size: 15px;
+		}
+		
+		.input_numero_sorteio{
+			width: 30%;
+		}
+		
+		.input_aparencia{
+			color: #333;
+			background-color: #fff;
+			border-color: #ccc;
+			border-radius: 4px;
+			border: 1px solid silver; 
+		}
+		
+		.numero_sorteio { width: 4px; }
+		.data_sorteio { width: 4px; }
+		.id_aposta { width: 2px; }
+		.total_acerto {width: 4px;}
+		.total_erro {width: 4px;}
+		.conc_no_data_found {background-color: yellow;}
+		
+	</style>
+	
+	
+
+</h:head>
+
+<h:body>
+	
+	<!-- CABECALHO -->
+	<ui:insert name="cabecalho">
+	
+	
+		<!-- Fixed navbar -->
+	    <nav class="navbar navbar-inverse navbar-fixed-top">
+	      <div class="container">
+	        
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand texto_menu" href="#{txt['urlInicio']}"><h:outputText value="#{msg['inicio']}"/> </a>
+	        </div>
+	        
+	        <div id="navbar" class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav">
+	             
+	            <li class="dropdown">
+	              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><h:outputText value="#{msg['cadastrar']}"/> <span class="caret"></span></a>
+	              <ul class="dropdown-menu">
+	                <li><a href="#{txt['cadastrar.meusJogos']}"><h:outputText value="#{msg['cadastrar.meusJogos']}"/></a></li>
+	                <li role="separator" class="divider"></li>
+	                <li><a href="#{txt['cadastrar.nvSorterio']}"><h:outputText value="#{msg['cadastrar.novoSorteio']}"/></a></li>
+	              </ul>
+	            </li>
+	            
+	            <li class="dropdown">
+	              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><h:outputText value="#{msg['buscar']}"/> <span class="caret"></span></a>
+	              <ul class="dropdown-menu">
+	                <li><a href="#"><h:outputText value="#{msg['buscar.sorteios']}"/></a></li>
+	              </ul>
+	            </li>
+	             
+	            <li class="dropdown">
+	              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><h:outputText value="#{msg['resultados']}"/> <span class="caret"></span></a>
+	              <ul class="dropdown-menu">
+	                <li><a href="#{txt['resultados.consultarResultados']}"><h:outputText value="#{msg['resultados.consultar']}"/></a></li>
+	              </ul>
+	            </li> 
+	             
+	            
+	            <li class="dropdown">
+	              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><h:outputText value="#{msg['idioma']}"/> <span class="caret"></span></a>
+	              <ul class="dropdown-menu dropdown_menu2">
+	              	<h:form id="frmLanguage">
+		                <!--li class="centralizar"><h:commandButton action="#{resourceController.changeLocale('br')}" image="resources/imgs/brazil_round_icon_64.png"/></li>
+		                <li class="centralizar"><h:commandButton action="#{resourceController.changeLocale('en')}" image="resources/imgs/united_states_of_america_round_icon_64.png"/></li>
+		                <li class="centralizar"><h:commandButton action="#{resourceController.changeLocale('es')}" image="resources/imgs/spain_round_icon_64.png"/-->
+						<li class="centralizar"><h:commandButton action="#{localeController.portugueseLocale}" image="resources/imgs/brazil_round_icon_64.png"/></li>
+		                <li class="centralizar"><h:commandButton action="#{localeController.englishLocale}" image="resources/imgs/united_states_of_america_round_icon_64.png"/></li>
+		                <li class="centralizar"><h:commandButton action="#{localeController.spanishLocale}" image="resources/imgs/spain_round_icon_64.png"/>		                
+		                </li>
+		            </h:form>
+	              </ul>
+	            </li>
+	            
+	          </ul>
+	          
+	
+	         </div><!--/.nav-collapse -->
+	        
+	       
+	        
+	      </div>
+	      
+
+	    </nav>
+	 
+ 
+		
+
+	</ui:insert>
+	
+	
+	<!-- CONTEUDO DA PAGINA -->
+	<ui:insert name="conteudo">
+        <h2>Area de conteudo para qualquer pagina</h2>
+    </ui:insert>
+	
+	<!-- RODAPE -->
+	<ui:insert name="rodape">
+		<div class="footer">
+		
+			<h5><b> <h:outputText value="#{msg['textoRodaPe']}" /> </b></h5>
+		</div>
+    </ui:insert>
+    
+    
+
+    
+    
+    <!-- Bootstrao - Latest compiled and minified JavaScript -->
+	<script src="resources/bootstrap/dist/js/bootstrap.min.js"></script>
+	
+
+
+    
+</h:body>
+
+</html>
+
+
