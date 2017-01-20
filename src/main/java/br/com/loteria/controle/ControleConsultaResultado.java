@@ -9,25 +9,28 @@ import br.com.loteria.beans.ResultadoSorteio;
 
 public class ControleConsultaResultado {
 
-	public ControleConsultaResultado() {}
 	
-	private static List<Integer> listaNumerosMinhaApostaOriginal = new ArrayList<Integer>();
-	
+	public ControleConsultaResultado() {
+	}
 
-	public List<ResultadoSorteio> validaAcertosEntreApostaSorteios(List<MinhaAposta> listaMinhasApostas, List<Concurso> listaConcursos){
-		
+	/**
+	 * Verifica os acertos entre Minhas Apostas x Concursos
+	 * @param listaMinhasApostas
+	 * @param listaConcursos
+	 * @return
+	 */
+	public List<ResultadoSorteio> validaAcertosEntreApostaSorteios(List<MinhaAposta> listaMinhasApostas, List<Concurso> listaConcursos) {
+
 		List<MinhaAposta> lstMinhasApostasAux = new ArrayList<MinhaAposta>();
-		
-		List<Concurso> lstConcursoAux = new ArrayList<Concurso>();
-		
-		List<ResultadoSorteio> listaREsultadoSorteio = new ArrayList<ResultadoSorteio>();
-		
-		
+
+		// Retorno
+		List<ResultadoSorteio> listaResultadoSorteio = new ArrayList<ResultadoSorteio>();
+
 		// 1 - Cria a lista de numeros para a minha aposta
-		for(MinhaAposta ma : listaMinhasApostas){
-			
+		for (MinhaAposta ma : listaMinhasApostas) {
+
 			List<Integer> listaIntegerTemp = new ArrayList<Integer>();
-			
+
 			listaIntegerTemp.add(ma.getNumero1());
 			listaIntegerTemp.add(ma.getNumero2());
 			listaIntegerTemp.add(ma.getNumero3());
@@ -43,155 +46,139 @@ public class ControleConsultaResultado {
 			listaIntegerTemp.add(ma.getNumero13());
 			listaIntegerTemp.add(ma.getNumero14());
 			listaIntegerTemp.add(ma.getNumero15());
-			
-			ma.setLstNumerosAposta(listaIntegerTemp);
-			
-			lstMinhasApostasAux.add(ma);
-			
-		}
-		
-		
-		// 2 - Cria a lista de numeros para o sorteio
-		for(Concurso concurso : listaConcursos){
-			
-			List<Integer> listaIntegerTemp = new ArrayList<Integer>();
-			
-			listaIntegerTemp.add(concurso.getNumero1());
-			listaIntegerTemp.add(concurso.getNumero2());
-			listaIntegerTemp.add(concurso.getNumero3());
-			listaIntegerTemp.add(concurso.getNumero4());
-			listaIntegerTemp.add(concurso.getNumero5());
-			listaIntegerTemp.add(concurso.getNumero6());
-			listaIntegerTemp.add(concurso.getNumero7());
-			listaIntegerTemp.add(concurso.getNumero8());
-			listaIntegerTemp.add(concurso.getNumero9());
-			listaIntegerTemp.add(concurso.getNumero10());
-			listaIntegerTemp.add(concurso.getNumero11());
-			listaIntegerTemp.add(concurso.getNumero12());
-			listaIntegerTemp.add(concurso.getNumero13());
-			listaIntegerTemp.add(concurso.getNumero14());
-			listaIntegerTemp.add(concurso.getNumero15());
-			
-			concurso.setLstNumerosSorteio(listaIntegerTemp);
-			
-			lstConcursoAux.add(concurso);
-			
-		}
-		
-		// Listas ja populadas. Limpar e Reiniciar as originais
-		listaMinhasApostas.clear(); 
-		listaConcursos.clear();
-		
-		listaMinhasApostas.addAll(lstMinhasApostasAux);
-		listaConcursos.addAll(lstConcursoAux);
-		
-		
-		
-		
-		// 3 - Aplica validacao. Percorre cada aposta minha para comparar com todos os sorteios
-		for(MinhaAposta ma : listaMinhasApostas){
-			// Backup original para nao perder os valroes origianis da minha aposta	
-			listaNumerosMinhaApostaOriginal.clear();
-			for(Integer n : ma.getLstNumerosAposta()){
-				listaNumerosMinhaApostaOriginal.add(n);
-			}
-			
-			for(Concurso concurso : listaConcursos){
-				
-				// Reter sempre da minha lista de numeros da aposta original
-				concurso.getLstNumerosSorteio().retainAll(listaNumerosMinhaApostaOriginal);
-				concurso.getLstNumerosSorteio().remove(null);
-				if(concurso.getLstNumerosSorteio().size() >= 11){
-					
-					String[] retorno = this.retornaNumerosAcertosErros(listaNumerosMinhaApostaOriginal, concurso);
-					
-					ma.setNumerosAcertados(retorno[2]);
-					ma.setTotalAcerto(retorno[3]);
-					
-					ma.setNumerosErrados(retorno[0]);
-					ma.setTotalErro(retorno[1]);
-					
-					if(ma.getTotalAcerto().equals("11")){
-						ma.setTotalGanhoReais(4.00d);
-					} else if (ma.getTotalAcerto().equals("12")){
-						ma.setTotalGanhoReais(8.00d);
-					} else if(ma.getTotalAcerto().equals("13")){
-						ma.setTotalGanhoReais(20.00d);
-					} else if(Integer.parseInt(ma.getTotalAcerto()) > 13 ){
-						ma.setTotalGanhoReais(99.99d);
-					} 
 
-					ResultadoSorteio rs = new ResultadoSorteio(new MinhaAposta(ma), new Concurso(concurso));
-					listaREsultadoSorteio.add(rs);
+			ma.setLstNumerosAposta(listaIntegerTemp);
+
+			lstMinhasApostasAux.add(new MinhaAposta(ma));
+
+		}
+				
+		List<Integer> lstNumApostaOriginal = new ArrayList<Integer>();
+
+		// Para cada aposta
+		for (MinhaAposta ma : lstMinhasApostasAux) {
+
+			// Liga controla de aposta original
+			Integer validaAposta = 1;
+
+			List<Concurso> novaListaConc = this.retornaListaConcurso(listaConcursos);
+
+			// Perocorro cada concurso
+			for(Concurso conc : novaListaConc){
+
+				// Limpa e armazena a aposta original somente 1 vez
+				if(validaAposta.equals(1)){
+					lstNumApostaOriginal.clear();
+				}
+				if(validaAposta.equals(1)){
+					lstNumApostaOriginal.add(new Integer(ma.getNumero1()));
+					lstNumApostaOriginal.add(new Integer(ma.getNumero2()));
+					lstNumApostaOriginal.add(new Integer(ma.getNumero3()));
+					lstNumApostaOriginal.add(new Integer(ma.getNumero4()));
+					lstNumApostaOriginal.add(new Integer(ma.getNumero5()));
+					lstNumApostaOriginal.add(new Integer(ma.getNumero6()));
+					lstNumApostaOriginal.add(new Integer(ma.getNumero7()));
+					lstNumApostaOriginal.add(new Integer(ma.getNumero8()));
+					lstNumApostaOriginal.add(new Integer(ma.getNumero9()));
+					lstNumApostaOriginal.add(new Integer(ma.getNumero10()));
+					lstNumApostaOriginal.add(new Integer(ma.getNumero11()));
+					lstNumApostaOriginal.add(new Integer(ma.getNumero12()));
+					lstNumApostaOriginal.add(new Integer(ma.getNumero13()));
+					lstNumApostaOriginal.add(new Integer(ma.getNumero14()));
+					lstNumApostaOriginal.add(new Integer(ma.getNumero15()));
 					
+					// Desliga
+					validaAposta = 0;
+				}
+				
+				// Garantir que a lista de apostas de "ma" sempre vai ter as apostas originais
+				ma.getLstNumerosAposta().clear();
+				for(Integer i : lstNumApostaOriginal){
+					ma.getLstNumerosAposta().add(i);
+				}
+				
+				// Remove da minha lista de Aposta tudo o que estiver CERTO em Sorteio
+				// Sobra os numeros ERRADOS
+				ma.getLstNumerosAposta().removeAll(conc.getLstNumerosSorteio());
+				
+				
+				// Retem na lista de Concurso tudo o que estiver CERTO
+				// Sobra os numeros CERTOS
+				conc.getLstNumerosSorteio().retainAll(lstNumApostaOriginal);
+				
+				
+				if(conc.getLstNumerosSorteio().size() >= 11){
+					
+					// Cria novo objeto de minha aposta com a lista de erros e acertos
+					MinhaAposta mApostaFinal = new MinhaAposta(ma);
+					
+					if(conc.getLstNumerosSorteio().size() == 11 ){
+						mApostaFinal.setTotalGanhoReais(4.00d);
+					} else if(conc.getLstNumerosSorteio().size() == 12){
+						mApostaFinal.setTotalGanhoReais(8.00d);
+					} else if(conc.getLstNumerosSorteio().size() == 13){
+						mApostaFinal.setTotalGanhoReais(20.00d);
+					} else if(conc.getLstNumerosSorteio().size() > 13){
+						mApostaFinal.setTotalGanhoReais(99.99d);
+					}
+					
+					mApostaFinal.setTotalErro(String.valueOf(ma.getLstNumerosAposta().size()));
+					mApostaFinal.setNumerosErrados(ma.getLstNumerosAposta().toString());
+					mApostaFinal.setTotalAcerto(String.valueOf(conc.getLstNumerosSorteio().size()));
+					mApostaFinal.setNumerosAcertados(conc.getLstNumerosSorteio().toString());
+					
+					// Cria novo objeto de concurso com a lista de acertos
+					Concurso concursoFinal = new Concurso(conc);
+					ResultadoSorteio rs= new ResultadoSorteio(mApostaFinal, concursoFinal);
+					
+					listaResultadoSorteio.add(rs);
 				}
 
 			}
-			
+
 		}
 
-		return listaREsultadoSorteio;
+		return listaResultadoSorteio;
+
+	}
+
+	/**
+	 * Monta uma lista de Concurso com lista de numeros sorteados
+	 * @param lstConcursoParam
+	 * @return
+	 */
+	private List<Concurso> retornaListaConcurso(List<Concurso> lstConcursoParam){
+		
+		List<Concurso> lstConcursoAux = new ArrayList<Concurso>();
+		
+		// 2 - Cria a lista de numeros para o sorteio
+		for (Concurso concurso : lstConcursoParam) {
+					
+			List<Integer> listaIntegerTemp = new ArrayList<Integer>();
+			listaIntegerTemp.add(new Integer(concurso.getNumero1()));
+			listaIntegerTemp.add(new Integer(concurso.getNumero2()));
+			listaIntegerTemp.add(new Integer(concurso.getNumero3()));
+			listaIntegerTemp.add(new Integer(concurso.getNumero4()));
+			listaIntegerTemp.add(new Integer(concurso.getNumero5()));
+			listaIntegerTemp.add(new Integer(concurso.getNumero6()));
+			listaIntegerTemp.add(new Integer(concurso.getNumero7()));
+			listaIntegerTemp.add(new Integer(concurso.getNumero8()));
+			listaIntegerTemp.add(new Integer(concurso.getNumero9()));
+			listaIntegerTemp.add(new Integer(concurso.getNumero10()));
+			listaIntegerTemp.add(new Integer(concurso.getNumero11()));
+			listaIntegerTemp.add(new Integer(concurso.getNumero12()));
+			listaIntegerTemp.add(new Integer(concurso.getNumero13()));
+			listaIntegerTemp.add(new Integer(concurso.getNumero14()));
+			listaIntegerTemp.add(new Integer(concurso.getNumero15()));
+
+			concurso.setLstNumerosSorteio(listaIntegerTemp);
+
+			lstConcursoAux.add(new Concurso(concurso));
+
+		}
+		
+		return lstConcursoAux;
 		
 	}
-	
-	                                         // MinhaAposta maAnalise
-	private String[] retornaNumerosAcertosErros(List<Integer> lstMinhaAposta, Concurso concursoAnalise){
-		
-		String[] totalCertoErrado = new String[4];
-		
-		//List<Integer> numApostaAux = new ArrayList<Integer>();
-		//numApostaAux.addAll(maAnalise.getLstNumerosAposta());
-		
-		List<Integer> listaNova = new ArrayList<Integer>();
-		
-		for(Integer i : lstMinhaAposta){
-			listaNova.add(i);
-		}
-		
-		
-		String ok = "";
-		String nOk = "";
-
-		// Corretos
-		
-		Integer i = 0;
-		for(Integer numero : concursoAnalise.getLstNumerosSorteio()){
-			if(ok == ""){
-				ok = numero.toString();
-				i++;
-			} else {
-				ok = ok + ", " + numero.toString();
-				i++;
-			}
-		}
-		
-		totalCertoErrado[2] = ok;
-		totalCertoErrado[3] = i.toString();
-
-		
-		// Incorretos
-		
-		//ma.getLstNumerosAposta().removeAll(concurso.getLstNumerosSorteio());
-		//numApostaAux.removeAll(concursoAnalise.getLstNumerosSorteio());
-		//maAnalise.getLstNumerosAposta().removeAll(concursoAnalise.getLstNumerosSorteio());
-		listaNova.removeAll(concursoAnalise.getLstNumerosSorteio());
-		
-		Integer j = 0;
-		for(Integer numero : listaNova/*numApostaAux  ma.getLstNumerosAposta()*/){
-			if(nOk == ""){
-				nOk = numero.toString();
-				j++;
-			} else {
-				nOk = nOk + ", " + numero.toString();
-				j++;
-			}
-		}
-		
-		totalCertoErrado[0] = nOk;
-		totalCertoErrado[1] = j.toString();
-
-		return totalCertoErrado;
-	}
-	
 	
 }
