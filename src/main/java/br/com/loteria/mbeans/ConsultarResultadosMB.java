@@ -29,7 +29,8 @@ public class ConsultarResultadosMB {
 	private List<ResultadoSorteio> listaResultadoSorteio;
 	
 	
-	private Integer numeroConcursoValidacaoInicial; 
+	private Integer numeroConcursoValidacaoInicial;
+	private Integer numeroConcursoValidacaoFinal;
 
 
 	/**
@@ -66,7 +67,13 @@ public class ConsultarResultadosMB {
 			
 			// Se informou um numero de concurso, recupara todos a partir dessem caso contrario, recupera todos
 			if (this.numeroConcursoValidacaoInicial > 0){
-				lstTodosConcursos = new ControleNovoSorteio().recuperarSorteiosMaioresIguaisPorID(numeroConcursoValidacaoInicial);
+				
+				// Verifica se tem um final
+				if(numeroConcursoValidacaoFinal > 0){
+					lstTodosConcursos = new ControleNovoSorteio().recuperarSorteiosEmIntervalosDeConcurso(numeroConcursoValidacaoInicial, numeroConcursoValidacaoFinal);	
+				} else {
+					lstTodosConcursos = new ControleNovoSorteio().recuperarSorteiosMaioresIguaisPorID(numeroConcursoValidacaoInicial);
+				}
 			} else {
 				lstTodosConcursos = new ControleNovoSorteio().recuperarTodosSorteios();
 			}
@@ -166,6 +173,33 @@ public class ConsultarResultadosMB {
 		}
 		
 		this.numeroConcursoValidacaoInicial = numeroConcursoValidacaoInicial;
+	}
+
+
+
+	/**
+	 * @return the numeroConcursoValidacaoFinal
+	 */
+	public Integer getNumeroConcursoValidacaoFinal() {
+		
+		if(numeroConcursoValidacaoFinal == null){
+			return new Integer(0);
+		}
+		return numeroConcursoValidacaoFinal;
+	}
+
+
+
+	/**
+	 * @param numeroConcursoValidacaoFinal the numeroConcursoValidacaoFinal to set
+	 */
+	public void setNumeroConcursoValidacaoFinal(Integer numeroConcursoValidacaoFinal) {
+		
+		if(numeroConcursoValidacaoFinal == null){
+			this.setNumeroConcursoValidacaoFinal(new Integer(0));
+		}	
+
+		this.numeroConcursoValidacaoFinal = numeroConcursoValidacaoFinal;
 	}
 	
 	

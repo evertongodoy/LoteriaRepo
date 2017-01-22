@@ -40,14 +40,20 @@
 				    	</h:commandButton>
 				    </div>
 
-				    <div class="col-md-3" style="text-align: right">
-				    	<h:outputLabel value="Conferir a partir do concurso:"/>
-
+				    <div class="col-md-2" style="text-align: right">
+				    	<h:outputLabel value="A partir de:"/>
 				    </div>
 
-				    <div class="col-md-3">
+				    <div class="col-md-1">
 				    	<h:inputText value="#{consultarResultadosMB.numeroConcursoValidacaoInicial}" styleClass="input_aparencia"/>
+				    </div>
+				    
+				     <div class="col-md-2" style="text-align: right">
+				    	<h:outputLabel value="até:"/>
+				    </div>
 
+				    <div class="col-md-1">
+				    	<h:inputText value="#{consultarResultadosMB.numeroConcursoValidacaoFinal}" styleClass="input_aparencia"/>
 				    </div>
 
 				</div>
@@ -61,7 +67,8 @@
 					
 					<div class="col-md-12">
 
-						<h:dataTable value="#{consultarResultadosMB.listaMinhasApostas}" var="aposta" border="2" cellspacing="0" width="100%" styleClass="table table-striped table-bordered">
+						<h:dataTable value="#{consultarResultadosMB.listaMinhasApostas}" var="aposta"
+									 border="2" cellspacing="0" width="100%" styleClass="table table-striped table-bordered">
 				            <h:column>
 				                <f:facet name="header">Selecionar</f:facet>
 				                <h:selectBooleanCheckbox value="#{consultarResultadosMB.checked[aposta.idAposta]}" />
@@ -148,10 +155,13 @@
 				<div id="#{cc.clientId}" class="modal fade myModal">
 				
 					<div class="modal-dialog modal-lg">
+				      
 				      <div class="modal-content">
+				        
 				        <div class="modal-header">
 				          <h4 class="modal-title">Conferir resultados de acertos</h4>
 				        </div>
+				        
 				        <div class="modal-body">
 
 							<!-- Inicio -->
@@ -160,7 +170,9 @@
 
 									<div class="col-md-12">
 
-										<h:dataTable value="#{consultarResultadosMB.listaResultadoSorteio}" var="resultadoSorteio" border="2" cellspacing="0" width="100%" styleClass="table table-striped table-bordered">
+										<h:dataTable value="#{consultarResultadosMB.listaResultadoSorteio}" var="resultadoSorteio" 
+													 border="2" cellspacing="0" width="100%" styleClass="table table-striped table-bordered"
+													 >
 
 								            <h:column headerClass="numero_sorteio">
 								                <f:facet name="header">NUMERO SORTEIO</f:facet>
@@ -206,7 +218,25 @@
 
 											<f:facet name="footer">
 												<h:outputText value="Não foram encontrados sorteios para as apostas selecionadas" rendered="#{empty consultarResultadosMB.listaResultadoSorteio}" styleClass="conc_no_data_found" style="text-align: center;"/>
+											
+												<h:panelGroup>
+									                <h:commandButton value="first" action="#{myBean.pageFirst}"
+									                    disabled="#{myBean.dataTable.first == 0}" />
+									                <h:commandButton value="prev" action="#{myBean.pagePrevious}"
+									                    disabled="#{myBean.dataTable.first == 0}" />
+									                <h:commandButton value="next" action="#{myBean.pageNext}"
+									                    disabled="#{myBean.dataTable.first + myBean.dataTable.rows
+									                        >= myBean.dataTable.rowCount}" />
+									                <h:commandButton value="last" action="#{myBean.pageLast}"
+									                    disabled="#{myBean.dataTable.first + myBean.dataTable.rows
+									                        >= myBean.dataTable.rowCount}" />
+									            </h:panelGroup>
+											
+											
 											</f:facet>
+											
+											
+											
 
 								        </h:dataTable>
 

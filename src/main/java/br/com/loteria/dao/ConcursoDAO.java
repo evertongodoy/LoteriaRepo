@@ -35,7 +35,7 @@ public class ConcursoDAO {
 		tx.begin();
 		
 		for(Concurso c : listConcurso){
-			
+			c.setIdConcurso(null);
 			manager.persist(c);
 			
 		}
@@ -89,6 +89,30 @@ public class ConcursoDAO {
 
 		return lstConcurso;
 	}
+	
+	
+	/**
+	 * Retorna lista de concursos em um intervalo de Sorteio
+	 * @param numeroConcursoInicial
+	 * @param numeroConcursoFinal
+	 * @return
+	 */
+	public List<Concurso> consultaConcursosEmIntervalo(Integer numeroConcursoInicial, Integer numeroConcursoFinal){
+		
+		EntityManager manager = JpaUtil.getEntityManager();
+		
+		TypedQuery<Concurso> query = manager.createNamedQuery("Concurso.queryListaConcursosEmIntervalo", Concurso.class);
+		
+		List<Concurso> lstConcurso = query.setParameter("numeroConcurso", numeroConcursoInicial).setParameter("numeroConcurso", numeroConcursoFinal).getResultList();
+		
+		manager.close();
+		
+		JpaUtil.close();
+
+		return lstConcurso;
+	}
+	
+	
 	
 	
 

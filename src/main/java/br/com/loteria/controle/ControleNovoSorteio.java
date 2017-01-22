@@ -33,4 +33,14 @@ public class ControleNovoSorteio {
 		return new ConcursoDAO().consultaConcursosMaioresIguaisPorID(numeroConcurso);
 	}
 	
+	/**
+	 * Recupera uma lista de concursos no DAO a partir de um intervalo de sorteio informado
+	 * @param numeroInicial
+	 * @param numeroFinal
+	 * @return
+	 */
+	public List<Concurso> recuperarSorteiosEmIntervalosDeConcurso(Integer numeroInicial, Integer numeroFinal){
+		return new ConcursoDAO().consultaConcursosEmIntervalo(numeroInicial, numeroFinal);
+	}
+	
 }

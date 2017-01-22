@@ -158,7 +158,11 @@
 											  action="#{novoSorteioMB.prepararCadastroSorteio}" 
 											  class="btn btn-primary btn-md" 
 											  style="margin-top: 10px; margin-left: 10px;" 
-											  value="#{msg['botao.salvar']}"/>
+											  value="#{msg['botao.salvar']}">
+							
+								<f:ajax execute="frmSalvarMeusNumeros"></f:ajax>
+				    			  		
+				    		</h:commandButton>
 						
 					</div>
 				</div>

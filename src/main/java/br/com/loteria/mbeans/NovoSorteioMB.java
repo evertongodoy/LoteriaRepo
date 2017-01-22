@@ -105,6 +105,9 @@ public class NovoSorteioMB {
 		
 		new ControleNovoSorteio().salvarNovoJogo(listConcurso);
 		
+		// Limpa dados
+		listConcurso.clear();
+		
 	}
 	
 	

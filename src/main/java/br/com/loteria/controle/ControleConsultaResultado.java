@@ -129,6 +129,7 @@ public class ControleConsultaResultado {
 					
 					// Cria novo objeto de concurso com a lista de acertos
 					Concurso concursoFinal = new Concurso(conc);
+					//Concurso concursoFinal = conc;
 					ResultadoSorteio rs= new ResultadoSorteio(mApostaFinal, concursoFinal);
 					
 					listaResultadoSorteio.add(rs);
@@ -174,7 +175,8 @@ public class ControleConsultaResultado {
 			concurso.setLstNumerosSorteio(listaIntegerTemp);
 
 			lstConcursoAux.add(new Concurso(concurso));
-
+			//lstConcursoAux.add(concurso);
+			
 		}
 		
 		return lstConcursoAux;
