@@ -25,4 +25,12 @@ public class ControleNovoSorteio {
 		return new ConcursoDAO().consultaTodosConcursos();
 	}
 	
+	/**
+	 * Recupera uma lista de concursos no DAO a partir do ID informado
+	 * @return
+	 */
+	public List<Concurso> recuperarSorteiosMaioresIguaisPorID(Integer numeroConcurso){
+		return new ConcursoDAO().consultaConcursosMaioresIguaisPorID(numeroConcurso);
+	}
+	
 }

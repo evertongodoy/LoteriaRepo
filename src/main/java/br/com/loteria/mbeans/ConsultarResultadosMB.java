@@ -28,6 +28,8 @@ public class ConsultarResultadosMB {
 	private List<MinhaAposta> listaMinhasApostasSelecionadas = new ArrayList<MinhaAposta>();
 	private List<ResultadoSorteio> listaResultadoSorteio;
 	
+	
+	private Integer numeroConcursoValidacaoInicial; 
 
 
 	/**
@@ -46,35 +48,43 @@ public class ConsultarResultadosMB {
 	 */
 	public void prepararConferenciaDeAcertosApostas(){
 		
+		// Lista que sera apresentada na tela
 		listaResultadoSorteio = new ArrayList<ResultadoSorteio>();
 
+		//Armazenara todos os concursos da analise 
+		List<Concurso> lstTodosConcursos;
+		
+		// Guarda os ID das apostas selecionadas para validar abaixo
 		for (MinhaAposta ma : listaMinhasApostas) {
             if (checked.get(ma.getIdAposta())) {
-            	listaMinhasApostasSelecionadas.add(ma);
+            	this.listaMinhasApostasSelecionadas.add(ma);
             }
         }
 
-		for(MinhaAposta ma : listaMinhasApostasSelecionadas){
-			System.out.println("APOSTA SELECIONADA ID = " + ma.getIdAposta() + " E DATA " + ma.getDataCriacao() );
+		// Verifica se foi selecionada alguma aposta, caso contrario, lanca erro
+		if (! this.listaMinhasApostasSelecionadas.isEmpty()){
+			
+			// Se informou um numero de concurso, recupara todos a partir dessem caso contrario, recupera todos
+			if (this.numeroConcursoValidacaoInicial > 0){
+				lstTodosConcursos = new ControleNovoSorteio().recuperarSorteiosMaioresIguaisPorID(numeroConcursoValidacaoInicial);
+			} else {
+				lstTodosConcursos = new ControleNovoSorteio().recuperarTodosSorteios();
+			}
+
+			// Iniciando validacao
+			listaResultadoSorteio = new ControleConsultaResultado().validaAcertosEntreApostaSorteios(listaMinhasApostasSelecionadas, lstTodosConcursos);
+
+			// Limpa variaveis
+			checked.clear();
+			listaMinhasApostasSelecionadas.clear();
+			listaMinhasApostas.clear();
+			
+			
+		} else {
+			System.out.println("LANCAR ERRO SELECAO APOSTA NAO REALIZADA");
 		}
 		
-		// ANTES, colocar aquim uam validacao para saber se foi selecionado alguma coisa.. e o codigo acima vou deletar.. era so pra teste
-		List<Concurso> lstTodosConcursos = new ControleNovoSorteio().recuperarTodosSorteios();
 		
-		
-		// Inicia validacao
-		listaResultadoSorteio = new ControleConsultaResultado().validaAcertosEntreApostaSorteios(listaMinhasApostasSelecionadas, lstTodosConcursos);
-		
-		/*
-		for(ResultadoSorteio rs : listaResultadoSorteio){
-			rs.getConcursoGanhador().getLstNumerosSorteio().size()
-		}
-		*/
-		
-		// Limpa variaveis
-		checked.clear();
-		listaMinhasApostasSelecionadas.clear();
-		listaMinhasApostas.clear();
 		
 		
 		
@@ -128,6 +138,34 @@ public class ConsultarResultadosMB {
 	 */
 	public void setListaREsultadoSorteio(List<ResultadoSorteio> listaResultadoSorteio) {
 		this.listaResultadoSorteio = listaResultadoSorteio;
+	}
+
+
+
+	/**
+	 * @return the numeroConcursoValidacaoInicial
+	 */
+	public Integer getNumeroConcursoValidacaoInicial() {
+		
+		if(numeroConcursoValidacaoInicial == null){
+			return new Integer(0);
+		}
+
+		return numeroConcursoValidacaoInicial;
+	}
+
+
+
+	/**
+	 * @param numeroConcursoValidacaoInicial the numeroConcursoValidacaoInicial to set
+	 */
+	public void setNumeroConcursoValidacaoInicial(Integer numeroConcursoValidacaoInicial) {
+		
+		if(numeroConcursoValidacaoInicial == null){
+			this.setNumeroConcursoValidacaoInicial(new Integer(0));
+		}
+		
+		this.numeroConcursoValidacaoInicial = numeroConcursoValidacaoInicial;
 	}
 	
 	

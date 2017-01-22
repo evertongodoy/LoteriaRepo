@@ -25,7 +25,8 @@ import javax.persistence.Transient;
 @Table(name="concurso")
 @NamedQueries({
 	@NamedQuery(name = "Concurso.queryListaConcursoByNumero", query = "Select C from Concurso C where 1 = 1 and C.numeroConcurso = :numeroConcurso ORDER BY C.dataConcurso"),
-	@NamedQuery(name = "Concurso.queryListaTodosConcursos", query = "Select C from Concurso C ORDER BY C.numeroConcurso DESC")
+	@NamedQuery(name = "Concurso.queryListaTodosConcursos", query = "Select C from Concurso C ORDER BY C.numeroConcurso DESC"),
+	@NamedQuery(name = "Concurso.queryListaConcursosIgualAcimaID", query = "Select C from Concurso C where 1 = 1 and C.numeroConcurso >= :numeroConcurso ORDER BY C.dataConcurso, C.numeroConcurso")
 })
 public class Concurso {
 	

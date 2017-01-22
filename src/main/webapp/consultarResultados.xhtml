@@ -22,7 +22,7 @@
 				<div class="row">
 					<div class="col-xs-12" style="height:20px;"></div>
 				</div>
-				
+
 				<div class="row">
 
 				    <div class="col-md-2">
@@ -30,7 +30,7 @@
 				    		<f:ajax render="frmSalvarMeusNumeros" execute="frmSalvarMeusNumeros"></f:ajax>
 				    	</h:commandButton>
 				    </div>
-				    
+
 				    <div class="col-md-2">
 				    	<h:commandButton value="Verificar Selecionados" class="btn btn-primary btn-md">
 				    					 <f:ajax listener="#{consultarResultadosMB.prepararConferenciaDeAcertosApostas}"
@@ -39,25 +39,24 @@
 				    					  		 onevent="listener" ></f:ajax>
 				    	</h:commandButton>
 				    </div>
-				    
-				    <div class="col-md-3">
+
+				    <div class="col-md-3" style="text-align: right">
 				    	<h:outputLabel value="Conferir a partir do concurso:"/>
-				    	
+
 				    </div>
-				    
+
 				    <div class="col-md-3">
-				    	<h:inputText value="PARA TESTE DE COMMIT"/>
-				    	
+				    	<h:inputText value="#{consultarResultadosMB.numeroConcursoValidacaoInicial}" styleClass="input_aparencia"/>
+
 				    </div>
-				    
-					
+
 				</div>
-				
+
 				<div class="row">
 					<div class="col-xs-12" style="height:40px;"></div>
 				</div>
-				
-				
+
+
 				<div class="row">
 					
 					<div class="col-md-12">
@@ -156,13 +155,13 @@
 				        <div class="modal-body">
 
 							<!-- Inicio -->
-								
+
 								<div class="row">
-					
+
 									<div class="col-md-12">
-				
+
 										<h:dataTable value="#{consultarResultadosMB.listaResultadoSorteio}" var="resultadoSorteio" border="2" cellspacing="0" width="100%" styleClass="table table-striped table-bordered">
-								            
+
 								            <h:column headerClass="numero_sorteio">
 								                <f:facet name="header">NUMERO SORTEIO</f:facet>
 								                    #{resultadoSorteio.concursoGanhador.numeroConcurso}
@@ -185,35 +184,35 @@
 								            <h:column headerClass="total_acerto">
 								                <f:facet name="header">TOTAL ACERTO</f:facet>
 								                    <h:outputText value="#{resultadoSorteio.minhaApostaGanhadora.totalAcerto}"/>
-								                    
+
 								            </h:column>
-								            
+
 								            <h:column>
 								                <f:facet name="header">ERROS</f:facet>
 								                    <h:outputText value="#{resultadoSorteio.minhaApostaGanhadora.numerosErrados}"/>
-								                    
+
 								            </h:column>
 								            <h:column headerClass="total_erro">
 								                <f:facet name="header">TOTAL ERRO</f:facet>
 								                    <h:outputText value="#{resultadoSorteio.minhaApostaGanhadora.totalErro}"/>
 								            </h:column>
-								            
+
 								            <h:column>
 								                <f:facet name="header">R$</f:facet>
 								                    <h:outputText value="#{resultadoSorteio.minhaApostaGanhadora.totalGanhoReais}">
 								                    	<f:convertNumber urrencySymbol="R$" type="currency" />
 								                    </h:outputText>
 								            </h:column>
-				
+
 											<f:facet name="footer">
 												<h:outputText value="Não foram encontrados sorteios para as apostas selecionadas" rendered="#{empty consultarResultadosMB.listaResultadoSorteio}" styleClass="conc_no_data_found" style="text-align: center;"/>
 											</f:facet>
-				
+
 								        </h:dataTable>
-				
+
 									</div>
 								</div>
-							
+
 							<!-- Fimm -->				          
 
 
@@ -231,13 +230,7 @@
 			    </div>
 		
 		
-		
-				
-				
-				
-				
-				
-				
+
 				
 			</h:form>
 		</div>

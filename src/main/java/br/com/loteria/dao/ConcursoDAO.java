@@ -70,54 +70,29 @@ public class ConcursoDAO {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	/**
-	 * Consulta Concurso pelo Numero do sorteio informado pelo usuario
-	 * @param numeroSorteio
+	 * Recupera uma lista de Concursos a partir de um numero de sorteio informado
+	 * @param numeroConcursoInicial
+	 * @return
 	 */
-	public List<Concurso> consultaSoretioByNumeroConcurso(Integer numeroConcurso){
+	public List<Concurso> consultaConcursosMaioresIguaisPorID(Integer numeroConcursoInicial){
 		
 		EntityManager manager = JpaUtil.getEntityManager();
 		
-		TypedQuery<Concurso> query = manager.createNamedQuery("Concurso.queryListaConcursoByNumero", Concurso.class);
+		TypedQuery<Concurso> query = manager.createNamedQuery("Concurso.queryListaConcursosIgualAcimaID", Concurso.class);
 		
-		List<Concurso> lstConcurso = query.setParameter("numeroConcurso", numeroConcurso).getResultList();
+		List<Concurso> lstConcurso = query.setParameter("numeroConcurso", numeroConcursoInicial).getResultList();
 		
 		manager.close();
 		
 		JpaUtil.close();
-		
+
 		return lstConcurso;
-		
 	}
+	
+	
+
+	
 
 
 	
