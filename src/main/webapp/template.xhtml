@@ -19,6 +19,9 @@
 
 	<!-- Bootstrap -->
     <link rel="stylesheet" href="resources/bootstrap/dist/css/bootstrap.min.css"/>
+    
+    <!-- DataTables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.css"/>
 
 
 	<!-- Funcao para obter o calendario a partir do  metodo datepicker  definido na jQuery UI -->
@@ -54,6 +57,9 @@
 		    }
 		}
 		
+		$(document).ready(function() {
+		    $('.myDataTablesJS').DataTable();
+		} );
 		
 	</script>
     
@@ -111,6 +117,15 @@
 		.total_acerto {width: 4px;}
 		.total_erro {width: 4px;}
 		.conc_no_data_found {background-color: yellow;}
+		
+		
+		input{
+			color: #333;
+			background-color: #fff;
+			border-color: #ccc;
+			border-radius: 4px;
+			border: 1px solid silver; 
+		}
 		
 	</style>
 	
@@ -217,6 +232,9 @@
     
     <!-- Bootstrao - Latest compiled and minified JavaScript -->
 	<script src="resources/bootstrap/dist/js/bootstrap.min.js"></script>
+	
+	<!-- DataDatbles - JS -->
+	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
 	
 
 
