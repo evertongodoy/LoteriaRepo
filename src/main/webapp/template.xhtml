@@ -42,10 +42,6 @@
 			});
 		} );
 
-		function showModal() {
-		    $('.myModal').modal('show');
-		}
-
 
 		function listener(data) {
 		    var status = data.status; // Can be "begin", "complete" or "success".
@@ -56,7 +52,8 @@
 		            break;
 		    }
 		}
-		
+
+		// Datatables
 		$(document).ready(function() {
 		    $('.myDataTablesJS').DataTable();
 		} );
@@ -235,6 +232,7 @@
 	
 	<!-- DataDatbles - JS -->
 	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
+
 	
 
 

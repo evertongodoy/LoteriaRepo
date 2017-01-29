@@ -14,8 +14,8 @@
 			
 				<div class="row">
 					<div class="col-sm-12">
-						<h3><h:outputLabel value="AQUI EU VOU FAZER AS VALIDACOES DE ACERTOS DOS RESULTADOS"/> </h3>
-						<p><h:outputLabel value="#{msg['cadastrar.numDifAposta']}"/></p>
+						<h3><h:outputLabel value="#{msg['resultados.tituloBusca']}"/> </h3>
+						<p><h:outputLabel value="#{msg['resultados.minhasApostas']}"/></p>
 					</div>
 				</div>
 				
@@ -26,22 +26,22 @@
 				<div class="row">
 
 				    <div class="col-md-2">
-				    	<h:commandButton value="Minhas Apostas" class="btn btn-primary btn-md" action="#{consultarResultadosMB.prepararListaMinhasApostas}">
-				    		<f:ajax render="frmSalvarMeusNumeros" execute="frmSalvarMeusNumeros"></f:ajax>
+				    	<h:commandButton value="#{msg['resultados.btMinhaAposta']}" class="btn btn-primary btn-md" action="#{consultarResultadosMB.prepararListaMinhasApostas}">
+				    		<f:ajax render="dtTableMinhasApostas" 
+				    				execute="frmSalvarMeusNumeros"></f:ajax>
 				    	</h:commandButton>
 				    </div>
 
 				    <div class="col-md-2">
-				    	<h:commandButton value="Verificar Selecionados" class="btn btn-primary btn-md">
+				    	<h:commandButton value="#{msg['resultados.btVerificarSelecionados']}" class="btn btn-success btn-md" action="#{consultarResultadosMB.mostraResultado}">
 				    					 <f:ajax listener="#{consultarResultadosMB.prepararConferenciaDeAcertosApostas}"
 				    					 		 execute="frmSalvarMeusNumeros"
-				    					 		 render="frmSalvarMeusNumeros"
 				    					  		 onevent="listener" ></f:ajax>
 				    	</h:commandButton>
 				    </div>
 
 				    <div class="col-md-2" style="text-align: right">
-				    	<h:outputLabel value="A partir de:"/>
+				    	<h:outputLabel value="#{msg['resultados.de']}"/>
 				    </div>
 
 				    <div class="col-md-1">
@@ -49,7 +49,7 @@
 				    </div>
 				    
 				     <div class="col-md-2" style="text-align: right">
-				    	<h:outputLabel value="até:"/>
+				    	<h:outputLabel value="#{msg['resultados.ate']}"/>
 				    </div>
 
 				    <div class="col-md-1">
@@ -63,22 +63,22 @@
 				</div>
 
 
-				<div class="row">
+				<div class="row" id="tableApostas">
 					
 					<div class="col-md-12">
 
-						<h:dataTable value="#{consultarResultadosMB.listaMinhasApostas}" var="aposta"
+						<h:dataTable value="#{consultarResultadosMB.listaMinhasApostas}" var="aposta" id="dtTableMinhasApostas"
 									 border="2" cellspacing="0" width="100%" styleClass="myDataTablesJS table table-striped table-bordered">
 				            <h:column>
-				                <f:facet name="header">Selecionar</f:facet>
+				                <f:facet name="header"><h:outputLabel value="#{msg['resultados.selecionar']}"/></f:facet>
 				                <h:selectBooleanCheckbox value="#{consultarResultadosMB.checked[aposta.idAposta]}" />
 				            </h:column>
 				            <h:column>
-				                <f:facet name="header">ID APOSTA</f:facet>
+				                <f:facet name="header"><h:outputLabel value="#{msg['resultados.idAposta']}"/></f:facet>
 				                    #{aposta.idAposta}
 				            </h:column>
 				            <h:column>
-				                <f:facet name="header">DATA CADASTRO</f:facet>
+				                <f:facet name="header"><h:outputLabel value="#{msg['resultados.dtApostaCadastrada']}"/></f:facet>
 				                    <h:outputText value="#{aposta.dataCriacao}">
 										<f:convertDateTime pattern="dd/MM/yyyy"/>
 									</h:outputText>
@@ -149,10 +149,7 @@
 					</div>
 				</div>
 				
-				
-		
-		
-				<div id="#{cc.clientId}" class="modal fade myModal">
+				<!--div id="#{cc.clientId}" class="modal fade myModal">
 				
 					<div class="modal-dialog modal-lg">
 				      
@@ -164,87 +161,6 @@
 				        
 				        <div class="modal-body">
 
-							<!-- Inicio -->
-
-								<div class="row">
-
-									<div class="col-md-12">
-
-										<h:dataTable value="#{consultarResultadosMB.listaResultadoSorteio}" var="resultadoSorteio" 
-													 border="2" cellspacing="0" width="100%" styleClass="table table-striped table-bordered"
-													 >
-
-								            <h:column headerClass="numero_sorteio">
-								                <f:facet name="header">NUMERO SORTEIO</f:facet>
-								                    #{resultadoSorteio.concursoGanhador.numeroConcurso}
-								            </h:column>
-								            <h:column headerClass="data_sorteio">
-								                <f:facet name="header">DATA SORTEIO</f:facet>
-								                    <h:outputText value="#{resultadoSorteio.concursoGanhador.dataConcurso}">
-														<f:convertDateTime pattern="dd/MM/yyyy"/>
-													</h:outputText>
-								            </h:column>
-								            <h:column headerClass="id_aposta">
-								                <f:facet name="header">ID APOSTA</f:facet>
-								                    <h:outputText value="#{resultadoSorteio.minhaApostaGanhadora.idAposta}"/>
-								            </h:column>
-								            <h:column>
-								                <f:facet name="header">ACERTOS</f:facet>
-								                    <h:outputText value="#{resultadoSorteio.minhaApostaGanhadora.numerosAcertados}"/>
-								            </h:column>
-								            
-								            <h:column headerClass="total_acerto">
-								                <f:facet name="header">TOTAL ACERTO</f:facet>
-								                    <h:outputText value="#{resultadoSorteio.minhaApostaGanhadora.totalAcerto}"/>
-
-								            </h:column>
-
-								            <h:column>
-								                <f:facet name="header">ERROS</f:facet>
-								                    <h:outputText value="#{resultadoSorteio.minhaApostaGanhadora.numerosErrados}"/>
-
-								            </h:column>
-								            <h:column headerClass="total_erro">
-								                <f:facet name="header">TOTAL ERRO</f:facet>
-								                    <h:outputText value="#{resultadoSorteio.minhaApostaGanhadora.totalErro}"/>
-								            </h:column>
-
-								            <h:column>
-								                <f:facet name="header">R$</f:facet>
-								                    <h:outputText value="#{resultadoSorteio.minhaApostaGanhadora.totalGanhoReais}">
-								                    	<f:convertNumber urrencySymbol="R$" type="currency" />
-								                    </h:outputText>
-								            </h:column>
-
-											<f:facet name="footer">
-												<h:outputText value="Não foram encontrados sorteios para as apostas selecionadas" rendered="#{empty consultarResultadosMB.listaResultadoSorteio}" styleClass="conc_no_data_found" style="text-align: center;"/>
-											
-												<h:panelGroup>
-									                <h:commandButton value="first" action="#{myBean.pageFirst}"
-									                    disabled="#{myBean.dataTable.first == 0}" />
-									                <h:commandButton value="prev" action="#{myBean.pagePrevious}"
-									                    disabled="#{myBean.dataTable.first == 0}" />
-									                <h:commandButton value="next" action="#{myBean.pageNext}"
-									                    disabled="#{myBean.dataTable.first + myBean.dataTable.rows
-									                        >= myBean.dataTable.rowCount}" />
-									                <h:commandButton value="last" action="#{myBean.pageLast}"
-									                    disabled="#{myBean.dataTable.first + myBean.dataTable.rows
-									                        >= myBean.dataTable.rowCount}" />
-									            </h:panelGroup>
-											
-											
-											</f:facet>
-											
-											
-											
-
-								        </h:dataTable>
-
-									</div>
-								</div>
-
-							<!-- Fimm -->				          
-
 
 
 				        </div>
@@ -254,10 +170,7 @@
 				      </div>
 				    </div>
 					
-					
-					
-				
-			    </div>
+			    </div-->
 		
 		
 

@@ -85,19 +85,21 @@ public class ConsultarResultadosMB {
 			checked.clear();
 			listaMinhasApostasSelecionadas.clear();
 			listaMinhasApostas.clear();
-			
-			
+
 		} else {
 			System.out.println("LANCAR ERRO SELECAO APOSTA NAO REALIZADA");
 		}
-		
-		
-		
-		
-		
+
 	}
-	
-	
+
+
+	/**
+	 * Apos recuperar e comparar as Apostas e Sorteios, redireciona para a pagina com o resultado final
+	 * @return
+	 */
+	public String mostraResultado(){
+		return "/resultadoConsultado.jsf?faces-redirect=true";
+	}
 
 	
 	

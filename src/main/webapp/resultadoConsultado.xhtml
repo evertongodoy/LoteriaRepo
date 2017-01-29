@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/template.xhtml">
+
+	<ui:define name="conteudo">
+
+
+		<div class="container">
+			
+			<div class="row">
+					<div class="col-sm-12">
+						<h3><h:outputLabel value="#{msg['resultados.tituloResultado']}"/> </h3>
+						<p><h:outputLabel value="#{msg['resultados.confira']}"/></p>
+					</div>
+			</div>
+				
+			<div class="row">
+				<div class="col-xs-12" style="height:20px;"></div>
+			</div>
+		
+
+			<div class="row">
+
+				<div class="col-md-12">
+
+					<h:dataTable value="#{consultarResultadosMB.listaResultadoSorteio}"
+								 var="resultadoSorteio" border="2" cellspacing="0" width="100%"
+								 styleClass="myDataTablesJS table table-striped table-bordered">
+
+						<h:column headerClass="numero_sorteio">
+							<f:facet name="header"><h:outputLabel value="#{msg['resultados.numSorteio']}"/></f:facet>
+								                    #{resultadoSorteio.concursoGanhador.numeroConcurso}
+								            </h:column>
+						<h:column headerClass="data_sorteio">
+							<f:facet name="header"><h:outputLabel value="#{msg['resultados.dtSorteio']}"/></f:facet>
+							<h:outputText
+								value="#{resultadoSorteio.concursoGanhador.dataConcurso}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</h:column>
+						<h:column headerClass="id_aposta">
+							<f:facet name="header"><h:outputLabel value="#{msg['resultados.idAposta']}"/></f:facet>
+							<h:outputText
+								value="#{resultadoSorteio.minhaApostaGanhadora.idAposta}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header"><h:outputLabel value="#{msg['resultados.acertos']}"/></f:facet>
+							<h:outputText
+								value="#{resultadoSorteio.minhaApostaGanhadora.numerosAcertados}" />
+						</h:column>
+
+						<h:column headerClass="total_acerto">
+							<f:facet name="header"><h:outputLabel value="#{msg['resultados.totalAcertos']}"/></f:facet>
+							<h:outputText
+								value="#{resultadoSorteio.minhaApostaGanhadora.totalAcerto}" />
+
+						</h:column>
+
+						<h:column>
+							<f:facet name="header"><h:outputLabel value="#{msg['resultados.erros']}"/></f:facet>
+							<h:outputText
+								value="#{resultadoSorteio.minhaApostaGanhadora.numerosErrados}" />
+
+						</h:column>
+						<h:column headerClass="total_erro">
+							<f:facet name="header"><h:outputLabel value="#{msg['resultados.totalErros']}"/></f:facet>
+							<h:outputText
+								value="#{resultadoSorteio.minhaApostaGanhadora.totalErro}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">R$</f:facet>
+							<h:outputText
+								value="#{resultadoSorteio.minhaApostaGanhadora.totalGanhoReais}">
+								<f:convertNumber urrencySymbol="R$" type="currency" />
+							</h:outputText>
+						</h:column>
+
+
+
+						<f:facet name="footer">
+							<h:outputText
+								value="Não foram encontrados sorteios para as apostas selecionadas"
+								rendered="#{empty consultarResultadosMB.listaResultadoSorteio}"
+								styleClass="conc_no_data_found" style="text-align: center;" />
+
+						</f:facet>
+
+					</h:dataTable>
+
+				</div>
+				
+			</div> <!-- end row -->
+
+		</div>
+
+
+	</ui:define>
+
+</ui:composition>
+
+</html>
