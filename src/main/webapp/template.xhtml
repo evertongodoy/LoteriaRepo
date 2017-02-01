@@ -42,13 +42,24 @@
 			});
 		} );
 
-
+		// Mensagem de aguarde
 		function listener(data) {
 		    var status = data.status; // Can be "begin", "complete" or "success".
 
 		    switch (status) {
-		        case "success": // After update of HTML DOM based on ajax response..
-		        	$('.myModal').modal('show');
+			    case "begin": // This is called right before ajax request is been sent.
+		        	 // $('.modalAguarde').modal('show');
+			    	document.getElementById("divShowWait").style.display = "block";
+		            break;
+
+		        //case "complete": // This is called right after ajax response is received.
+		        //    messageForInputElement.innerHTML = "";
+		        //    $('.modalAguarde').modal('hide');
+		        //    break;
+
+		        case "success": // This is called when ajax response is successfully processed.
+		        	//$('.myModal').modal('show');
+		        	document.getElementById("divShowWait").style.display = "none";
 		            break;
 		    }
 		}
@@ -124,17 +135,44 @@
 			border: 1px solid silver; 
 		}
 		
+		.divWait{
+    		/*height:100vh;*/ /*vh stands for view-port height, 1vh is 1% of screen height*/
+    		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#feffff+57,d2ebf9+100*/
+			background: #feffff; /* Old browsers */
+			background: -moz-linear-gradient(top,  #feffff 35%, #d2ebf9 100%); /* FF3.6-15 */
+			background: -webkit-linear-gradient(top,  #feffff 35%,#d2ebf9 100%); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to bottom,  #feffff 35%,#d2ebf9 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#d2ebf9',GradientType=0 ); /* IE6-9 */
+			
+			height: 100%;
+			width: 100%;
+			position: fixed;
+			
+			display: table;
+		}
+	
+		.imgLoading{
+			position: relative;
+		    top: 50%;
+		    display: block;
+			margin-left: auto;
+    		margin-right: auto;
+		}
+		
 	</style>
 	
-	
-
 </h:head>
 
 <h:body>
+
+	
+	
 	
 	<!-- CABECALHO -->
 	<ui:insert name="cabecalho">
-	
+	<div id="divShowWait" style="display: none;" class="divWait">
+		<h:graphicImage value="resources/imgs/loading.gif" styleClass="imgLoading" />
+	</div>	
 	
 		<!-- Fixed navbar -->
 	    <nav class="navbar navbar-inverse navbar-fixed-top">

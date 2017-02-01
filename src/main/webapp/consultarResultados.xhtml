@@ -28,7 +28,8 @@
 				    <div class="col-md-2">
 				    	<h:commandButton value="#{msg['resultados.btMinhaAposta']}" class="btn btn-primary btn-md" action="#{consultarResultadosMB.prepararListaMinhasApostas}">
 				    		<f:ajax render="dtTableMinhasApostas" 
-				    				execute="frmSalvarMeusNumeros"></f:ajax>
+				    				execute="frmSalvarMeusNumeros"
+				    				onevent="listener"></f:ajax>
 				    	</h:commandButton>
 				    </div>
 
