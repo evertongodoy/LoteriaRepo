@@ -1,9 +1,9 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
 
 <h:head>
 	<title>JSF 2.0 - Exemplo de template</title>
@@ -137,12 +137,16 @@
 		
 		.divWait{
     		/*height:100vh;*/ /*vh stands for view-port height, 1vh is 1% of screen height*/
-    		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#feffff+57,d2ebf9+100*/
-			background: #feffff; /* Old browsers */
-			background: -moz-linear-gradient(top,  #feffff 35%, #d2ebf9 100%); /* FF3.6-15 */
-			background: -webkit-linear-gradient(top,  #feffff 35%,#d2ebf9 100%); /* Chrome10-25,Safari5.1-6 */
-			background: linear-gradient(to bottom,  #feffff 35%,#d2ebf9 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#d2ebf9',GradientType=0 ); /* IE6-9 */
+    		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fdf3ef+46,f9d7c9+69,f9d7c9+79,fed0be+93,f4e7e2+100 */
+			background: rgb(253,243,239); /* Old browsers */
+			background: -moz-linear-gradient(top,  rgba(253,243,239,1) 46%, rgba(249,215,201,1) 69%, rgba(249,215,201,1) 79%, rgba(254,208,190,1) 93%, rgba(244,231,226,1) 100%); /* FF3.6-15 */
+			background: -webkit-linear-gradient(top,  rgba(253,243,239,1) 46%,rgba(249,215,201,1) 69%,rgba(249,215,201,1) 79%,rgba(254,208,190,1) 93%,rgba(244,231,226,1) 100%); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to bottom,  rgba(253,243,239,1) 46%,rgba(249,215,201,1) 69%,rgba(249,215,201,1) 79%,rgba(254,208,190,1) 93%,rgba(244,231,226,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdf3ef', endColorstr='#f4e7e2',GradientType=0 ); /* IE6-9 */
+    		
+    		
+    		
+    		
 			
 			height: 100%;
 			width: 100%;

@@ -119,7 +119,7 @@ public class ControleConsultaResultado {
 					} else if(conc.getLstNumerosSorteio().size() == 13){
 						mApostaFinal.setTotalGanhoReais(20.00d);
 					} else if(conc.getLstNumerosSorteio().size() > 13){
-						mApostaFinal.setTotalGanhoReais(99.99d);
+						mApostaFinal.setTotalGanhoReais(100000000.00d);
 					}
 					
 					mApostaFinal.setTotalErro(String.valueOf(ma.getLstNumerosAposta().size()));

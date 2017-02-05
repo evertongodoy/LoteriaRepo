@@ -94,8 +94,35 @@ public class MeusJogosMB {
 		
 		new ControleMinhaAposta().salvarMinhaAposta(ma);
 		
+		this.limparTela();
+		
 	}
 	
+	
+	/**
+	 * Limpa os dados da tela apos cadastro
+	 */
+	public void limparTela(){
+
+		this.primeiraPosicao = 1;
+		this.segundaPosicao = 2;
+		this.terceiraPosicao = 3;
+		this.quartaPosicao = 4;
+		this.quintaPosicao = 5;
+		this.sextaPosicao = 6;
+		this.setimaPosicao = 7;
+		this.oitavaPosicao = 8;
+		this.nonaPosicao = 9;
+		this.decimaPosicao = 10;
+		this.decimaPrimeiraPosicao = 11;
+		this.decimaSegundaPosicao = 12;
+		this.decimaTerceiraPosicao = 13;
+		this.decimaQuartaPosicao = 14;
+		this.decimaQuintaPosicao = 15;
+
+		this.observacao = "";
+
+	}
 	
 	
 	

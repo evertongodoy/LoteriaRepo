@@ -1,14 +1,14 @@
 <ui:composition template="/template.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
 
 
 	<ui:define name="conteudo">
 
 		<div class="container">
-			<h:form id="frmSalvarMeusNumeros">	
+			<h:form id="frmSalvarNovoSorteio">	
 			
 				<div class="row">
 					<div class="col-sm-12">
@@ -24,7 +24,7 @@
 				<div class="row">
 					<div class="col-md-4">
 				    	<h:outputLabel value="#{msg['cadastrar.numeroSorteio']}"/>
-				    	<h:inputText styleClass="input_numero_sorteio input_aparencia" value="#{novoSorteioMB.numeroSorteio}"/>
+				    	<h:inputText styleClass="input_numero_sorteio input_aparencia" value="#{novoSorteioMB.numeroSorteio}" id="numSorteio"/>
 				    </div>
 				    
 				    <div class="col-md-4">
@@ -34,6 +34,8 @@
 			    	</div>
 				</div>
 
+
+				<!-- 1 a 5 -->
 				<div class="row">
 					<div class="col-xs-12" style="height:40px;"></div>
 				</div>
@@ -42,37 +44,40 @@
 
 				    <div class="col-md-2">
 				    	# 1
-				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.primeiraPosicao}">
+				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.primeiraPosicao}" id="slctUm">
 								<f:selectItems value="#{novoSorteioMB.lstNumerosExistentes}" var="varNumeros" itemValue="#{varNumeros.id}" itemLabel="#{varNumeros.valor}"/>							
 						</h:selectOneMenu>
 				    </div>
 				    <div class="col-md-2">
 			    		# 2
-				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.segundaPosicao}">
+				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.segundaPosicao}" id="slctDois">
 							<f:selectItems value="#{novoSorteioMB.lstNumerosExistentes}" var="varNumeros" itemValue="#{varNumeros.id}" itemLabel="#{varNumeros.valor}"/>							
 						</h:selectOneMenu>
 			    	</div>
 				    <div class="col-md-2">
 				        # 3
-				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.terceiraPosicao}">
+				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.terceiraPosicao}" id="slctTres">
 							<f:selectItems value="#{novoSorteioMB.lstNumerosExistentes}" var="varNumeros" itemValue="#{varNumeros.id}" itemLabel="#{varNumeros.valor}"/>							
 						</h:selectOneMenu>
 				    </div>
 				    <div class="col-md-2">
 				    	# 4
-				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.quartaPosicao}">
+				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.quartaPosicao}" id="slctQuatro">
 							<f:selectItems value="#{novoSorteioMB.lstNumerosExistentes}" var="varNumeros" itemValue="#{varNumeros.id}" itemLabel="#{varNumeros.valor}"/>							
 						</h:selectOneMenu>
 				    </div>
 				    <div class="col-md-2">
 				    	# 5 
-				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.quintaPosicao}">
+				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.quintaPosicao}" id="slctCinco">
 							<f:selectItems value="#{novoSorteioMB.lstNumerosExistentes}" var="varNumeros" itemValue="#{varNumeros.id}" itemLabel="#{varNumeros.valor}"/>							
 						</h:selectOneMenu>
 				    </div>
 					
 				</div>
 				
+
+				
+				<!-- 6 a 10 -->
 				<div class="row">
 					<div class="col-xs-12" style="height:40px;"></div>
 				</div>
@@ -80,36 +85,39 @@
 				<div class="row">
 				    <div class="col-md-2">
 				    	# 6
-				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.sextaPosicao}">
+				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.sextaPosicao}" id="slctSeis">
 							<f:selectItems value="#{novoSorteioMB.lstNumerosExistentes}" var="varNumeros" itemValue="#{varNumeros.id}" itemLabel="#{varNumeros.valor}"/>							
 						</h:selectOneMenu>
 				    </div>
 				    <div class="col-md-2">
 				    	# 7
-				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.setimaPosicao}">
+				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.setimaPosicao}" id="slctSete">
 							<f:selectItems value="#{novoSorteioMB.lstNumerosExistentes}" var="varNumeros" itemValue="#{varNumeros.id}" itemLabel="#{varNumeros.valor}"/>							
 						</h:selectOneMenu>
 				    </div>
 				    <div class="col-md-2">
 				        # 8
-				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.oitavaPosicao}">
+				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.oitavaPosicao}" id="slctOito">
 							<f:selectItems value="#{novoSorteioMB.lstNumerosExistentes}" var="varNumeros" itemValue="#{varNumeros.id}" itemLabel="#{varNumeros.valor}"/>							
 						</h:selectOneMenu>
 				    </div>
 				    <div class="col-md-2">
 				    	# 9
-				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.nonaPosicao}">
+				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.nonaPosicao}" id="slctNove">
 							<f:selectItems value="#{novoSorteioMB.lstNumerosExistentes}" var="varNumeros" itemValue="#{varNumeros.id}" itemLabel="#{varNumeros.valor}"/>							
 						</h:selectOneMenu>
 				    </div>
 				    <div class="col-md-2">
 				    	#10
-				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.decimaPosicao}">
+				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.decimaPosicao}" id="slctDez">
 							<f:selectItems value="#{novoSorteioMB.lstNumerosExistentes}" var="varNumeros" itemValue="#{varNumeros.id}" itemLabel="#{varNumeros.valor}"/>							
 						</h:selectOneMenu>
 				    </div>
 				</div>
 				
+				
+				
+				<!-- 11 a 15 -->
 				<div class="row">
 					<div class="col-xs-12" style="height:40px;"></div>
 				</div>
@@ -117,36 +125,38 @@
 				<div class="row">
 				    <div class="col-md-2">
 				    	#11
-				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.decimaPrimeiraPosicao}">
+				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.decimaPrimeiraPosicao}" id="slctOnze">
 							<f:selectItems value="#{novoSorteioMB.lstNumerosExistentes}" var="varNumeros" itemValue="#{varNumeros.id}" itemLabel="#{varNumeros.valor}"/>							
 						</h:selectOneMenu>
 				    </div>
 				    <div class="col-md-2">
 				    	#12
-				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.decimaSegundaPosicao}">
+				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.decimaSegundaPosicao}" id="slctDoze">
 							<f:selectItems value="#{novoSorteioMB.lstNumerosExistentes}" var="varNumeros" itemValue="#{varNumeros.id}" itemLabel="#{varNumeros.valor}"/>							
 						</h:selectOneMenu>
 				    </div>
 				    <div class="col-md-2">
 				        #13
-				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.decimaTerceiraPosicao}">
+				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.decimaTerceiraPosicao}" id="slctTreze">
 							<f:selectItems value="#{novoSorteioMB.lstNumerosExistentes}" var="varNumeros" itemValue="#{varNumeros.id}" itemLabel="#{varNumeros.valor}"/>							
 						</h:selectOneMenu>
 				    </div>
 				    <div class="col-md-2">
 				    	#14
-				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.decimaQuartaPosicao}">
+				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.decimaQuartaPosicao}" id="slctQuatorze">
 							<f:selectItems value="#{novoSorteioMB.lstNumerosExistentes}" var="varNumeros" itemValue="#{varNumeros.id}" itemLabel="#{varNumeros.valor}"/>							
 						</h:selectOneMenu>
 				    </div>
 				    <div class="col-md-2">
 				    	#15
-				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.decimaQuintaPosicao}">
+				    	<h:selectOneMenu styleClass="btn btn-default dropdown-toggle" value="#{novoSorteioMB.decimaQuintaPosicao}" id="slctQuinze">
 							<f:selectItems value="#{novoSorteioMB.lstNumerosExistentes}" var="varNumeros" itemValue="#{varNumeros.id}" itemLabel="#{varNumeros.valor}"/>							
 						</h:selectOneMenu>
 				    </div>
 				</div>
 	
+	
+				<!-- Botoes -->
 				<div class="row">
 					<div class="col-xs-12" style="height:50px;"></div>
 				</div>
@@ -159,11 +169,12 @@
 											  class="btn btn-primary btn-md" 
 											  style="margin-top: 10px; margin-left: 10px;" 
 											  value="#{msg['botao.salvar']}">
-							
-								<f:ajax execute="frmSalvarMeusNumeros"></f:ajax>
-				    			  		
+								
+								<f:ajax execute="@form" render="frmSalvarNovoSorteio:numSorteio frmSalvarNovoSorteio:slctUm frmSalvarNovoSorteio:slctDois frmSalvarNovoSorteio:slctTres frmSalvarNovoSorteio:slctQuatro frmSalvarNovoSorteio:slctCinco frmSalvarNovoSorteio:slctSeis frmSalvarNovoSorteio:slctSete frmSalvarNovoSorteio:slctOito frmSalvarNovoSorteio:slctNove frmSalvarNovoSorteio:slctDez frmSalvarNovoSorteio:slctOnze frmSalvarNovoSorteio:slctDoze frmSalvarNovoSorteio:slctTreza frmSalvarNovoSorteio:slctQuatorze frmSalvarNovoSorteio:slctQuinze" onevent="listener">
+								</f:ajax>
+
 				    		</h:commandButton>
-						
+
 					</div>
 				</div>
 				

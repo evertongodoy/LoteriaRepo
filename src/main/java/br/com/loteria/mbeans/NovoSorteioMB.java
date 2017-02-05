@@ -49,10 +49,9 @@ public class NovoSorteioMB {
 	 * @throws Exception 
 	 */
 	public void prepararCadastroSorteio() throws Exception{
-		
+
 		// Criando um set para evitar numeros duplicados
 		Set<Integer> numerosSorteio = new HashSet<Integer>();
-		numerosSorteio.clear();
 
 		numerosSorteio.add(primeiraPosicao);
 		numerosSorteio.add(segundaPosicao);
@@ -106,15 +105,40 @@ public class NovoSorteioMB {
 		new ControleNovoSorteio().salvarNovoJogo(listConcurso);
 		
 		// Limpa dados
-		listConcurso.clear();
+		//listConcurso.clear();
+		this.limparTela();
 		
 	}
 	
 	
-	
-	
-	
-	
+	/**
+	 * Limpa os dados da tela apos cadastro
+	 */
+	public void limparTela(){
+
+		listConcurso.clear();
+
+		this.primeiraPosicao = 1;
+		this.segundaPosicao = 2;
+		this.terceiraPosicao = 3;
+		this.quartaPosicao = 4;
+		this.quintaPosicao = 5;
+		this.sextaPosicao = 6;
+		this.setimaPosicao = 7;
+		this.oitavaPosicao = 8;
+		this.nonaPosicao = 9;
+		this.decimaPosicao = 10;
+		this.decimaPrimeiraPosicao = 11;
+		this.decimaSegundaPosicao = 12;
+		this.decimaTerceiraPosicao = 13;
+		this.decimaQuartaPosicao = 14;
+		this.decimaQuintaPosicao = 15;
+
+		this.numeroSorteio = new Integer(0);
+
+	}
+
+
 	/**
 	 * @return the numeroSorteio
 	 */
