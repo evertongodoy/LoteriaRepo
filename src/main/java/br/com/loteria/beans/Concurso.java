@@ -27,7 +27,8 @@ import javax.persistence.Transient;
 	@NamedQuery(name = "Concurso.queryListaConcursoByNumero", query = "Select C from Concurso C where 1 = 1 and C.numeroConcurso = :numeroConcurso ORDER BY C.idConcurso DESC"),
 	@NamedQuery(name = "Concurso.queryListaTodosConcursos", query = "Select C from Concurso C ORDER BY C.idConcurso DESC"),
 	@NamedQuery(name = "Concurso.queryListaConcursosIgualAcimaID", query = "Select C from Concurso C where 1 = 1 and C.numeroConcurso >= :numeroConcurso ORDER BY C.idConcurso DESC"),
-	@NamedQuery(name = "Concurso.queryListaConcursosEmIntervalo", query = "Select C from Concurso C where 1 = 1 and C.numeroConcurso BETWEEN :numeroConcurso and :numeroConcurso ORDER BY C.idConcurso DESC")
+	@NamedQuery(name = "Concurso.queryListaConcursosEmIntervalo", query = "Select C from Concurso C where 1 = 1 and C.numeroConcurso BETWEEN :numeroConcurso and :numeroConcurso ORDER BY C.idConcurso DESC"),
+	@NamedQuery(name = "Concurso.queryListaConcursosEmIntervaloDatas", query = "select C from Concurso C WHERE (null = :inicio OR C.dataConcurso >= :inicio) AND (null = :fim OR C.dataConcurso <= :fim)")
 })
 public class Concurso {
 	

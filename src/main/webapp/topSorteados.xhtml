@@ -1,0 +1,177 @@
+<ui:composition template="/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:define name="conteudo">
+
+		<div class="container">
+			<h:form id="frmConsultarTopSorteados">	
+			
+				<!-- Cabecalhoda pagina -->
+				<div class="row">
+					<div class="col-sm-12">
+						<h3><h:outputLabel value="#{msg['resultados.tituloBusca']}"/> </h3>
+						<p><h:outputLabel value="#{msg['resultados.minhasApostas']}"/></p>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-12" style="height:20px;"></div>
+				</div>
+
+				<!-- Botao de busca e texts das Datas -->
+				<div class="row">
+
+				    <div class="col-md-2">
+				    	<h:commandButton value="#{msg['resultados.btMinhaAposta']}" class="btn btn-primary btn-md" action="#{consultarResultadosMB.prepararListaMinhasApostas}">
+				    		<f:ajax render="dtTableMinhasApostas" 
+				    				execute="frmSalvarMeusNumeros"
+				    				onevent="listener"></f:ajax>
+				    	</h:commandButton>
+				    </div>
+
+				    <div class="col-md-2" style="text-align: right">
+				    	<h:outputLabel value="Data inicial"/>
+				    </div>
+				    <div class="col-md-1">
+				    	<h:inputText value="#{consultarResultadosMB.numeroConcursoValidacaoInicial}" styleClass="input_aparencia"/>
+				    </div>
+				    
+				    
+				     <div class="col-md-2" style="text-align: right">
+				    	<h:outputLabel value="Data final"/>
+				    </div>
+				    <div class="col-md-1">
+				    	<h:inputText value="#{consultarResultadosMB.numeroConcursoValidacaoFinal}" styleClass="input_aparencia"/>
+				    </div>
+
+				</div>
+
+				<div class="row">
+					<div class="col-xs-12" style="height:40px;"></div>
+				</div>
+
+
+				<div class="row" id="tableTopSorteados">
+					
+					<div class="col-md-12">
+
+						<h:dataTable value="#{consultarResultadosMB.listaMinhasApostas}" var="aposta" id="dtTableMinhasApostas"
+									 border="2" cellspacing="0" width="100%" styleClass="myDataTablesJS table table-striped table-bordered">
+
+				            <h:column>
+				                <f:facet name="header"># 1</f:facet>
+				                    #{aposta.numero1}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 2</f:facet>
+				                    #{aposta.numero2}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 3</f:facet>
+				                    #{aposta.numero3}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 4</f:facet>
+				                    #{aposta.numero4}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 5</f:facet>
+				                    #{aposta.numero5}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 6</f:facet>
+				                    #{aposta.numero6}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 7</f:facet>
+				                    #{aposta.numero7}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 8</f:facet>
+				                    #{aposta.numero8}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 9</f:facet>
+				                    #{aposta.numero9}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 10</f:facet>
+				                    #{aposta.numero10}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 11</f:facet>
+				                    #{aposta.numero11}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 12</f:facet>
+				                    #{aposta.numero12}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 13</f:facet>
+				                    #{aposta.numero13}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 14</f:facet>
+				                    #{aposta.numero14}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 15</f:facet>
+				                    #{aposta.numero15}
+				            </h:column>				            
+				            <h:column>
+				                <f:facet name="header"># 16</f:facet>
+				                    #{aposta.numero15}
+				            </h:column>				  
+				            <h:column>
+				                <f:facet name="header"># 17</f:facet>
+				                    #{aposta.numero15}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 18</f:facet>
+				                    #{aposta.numero15}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 19</f:facet>
+				                    #{aposta.numero15}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 20</f:facet>
+				                    #{aposta.numero15}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 21</f:facet>
+				                    #{aposta.numero15}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 22</f:facet>
+				                    #{aposta.numero15}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 23</f:facet>
+				                    #{aposta.numero15}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 24</f:facet>
+				                    #{aposta.numero15}
+				            </h:column>
+				            <h:column>
+				                <f:facet name="header"># 25</f:facet>
+				                    #{aposta.numero15}
+				            </h:column>
+
+				        </h:dataTable>
+
+					</div>
+				</div>
+				
+			</h:form>
+		</div>
+	
+	</ui:define>
+
+
+
+</ui:composition>

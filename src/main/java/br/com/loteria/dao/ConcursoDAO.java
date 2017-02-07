@@ -3,13 +3,12 @@
  */
 package br.com.loteria.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
-
-
 
 import br.com.loteria.beans.Concurso;
 import br.com.loteria.utils.JpaUtil;
@@ -113,6 +112,40 @@ public class ConcursoDAO {
 	}
 	
 	
+	/**
+	 * Recupera lista de concurso por um intervalo de Datas
+	 * @param dataInicial
+	 * @param dataFinal
+	 * @return
+	 */
+	public List<Concurso> consultaConcursoEmIntervaloDatas(Date dataInicial, Date dataFinal){
+		
+		EntityManager manager = JpaUtil.getEntityManager();
+		
+		TypedQuery<Concurso> query = manager.createNamedQuery("Concurso.queryListaConcursosEmIntervaloDatas", Concurso.class);
+		
+		List<Concurso> lstConcurso;
+		
+		if(dataInicial == null && dataFinal == null){
+			
+			lstConcurso = query.setParameter("inicio", null).setParameter("fim", null).getResultList();
+			
+		} else if(dataInicial != null && dataFinal == null){
+			
+			lstConcurso = query.setParameter("inicio", dataInicial).setParameter("fim", null).getResultList();
+			
+		} else if(dataInicial == null && dataFinal != null){
+			
+			lstConcurso = query.setParameter("inicio", null).setParameter("fim", dataFinal).getResultList();
+			
+		} else {
+			
+			lstConcurso = query.setParameter("inicio", dataInicial).setParameter("fim", dataFinal).getResultList();
+		}
+
+		return lstConcurso;
+
+	}
 	
 	
 
